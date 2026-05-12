@@ -130,3 +130,25 @@ def create_track():
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
 ```
+
+## Запуск Flask сервера
+
+**Команда:**
+```bash
+python3 app.py
+```
+
+**Вывод:**
+```
+* Serving Flask app 'app.py'
+* Debug mode: on
+* Running on http://127.0.0.1:5000
+```
+
+## Тестирование API
+
+# Тест 1. GET /api/tracks (получить все треки)
+  
+```bash
+curl http://127.0.0.1:5000/api/tracks/1
+```
