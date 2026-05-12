@@ -62,3 +62,71 @@ Successfully installed flask-3.1.3
 ```
 
 ## Код REST API (app.py)
+
+```python
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# Хранилище треков (в памяти)
+tracks = [
+    {'id': 1, 'title': 'Bohemian Rhapsody', 'artist': 'Queen', 'album': 'A Night at the Opera'},
+    {'id': 2, 'title': 'Imagine', 'artist': 'John Lennon', 'album': 'Imagine'}
+]
+next_id = 3  # Счетчик для следующего ID
+
+
+# 1. GET /api/tracks - получить все треки
+@app.route('/api/tracks', methods=['GET'])
+def get_tracks():
+    """Возвращает список всех треков"""
+    return jsonify(tracks)
+
+# 2. GET /api/tracks/<id> - получить один трек по ID
+@app.route('/api/tracks/<int:track_id>', methods=['GET'])
+def get_track(track_id):
+    """Возвращает трек с указанным ID"""
+    # Ищет трек с нужным ID
+    track = next((t for t in tracks if t['id'] == track_id), None)
+    
+    if track is None:
+        return jsonify({'error': 'Track not found'}), 404
+    
+    return jsonify(track)
+
+# 3. POST /api/tracks - создать новый трек
+@app.route('/api/tracks', methods=['POST'])
+def create_track():
+    """Добавляет новый трек в коллекцию"""
+    global next_id
+    
+    # Проверяем, что пришел JSON
+    if not request.is_json:
+        return jsonify({'error': 'Content-Type must be application/json'}), 400
+    
+    data = request.get_json()
+    
+    # Проверяем наличие всех полей
+    required_fields = ['title', 'artist', 'album']
+    for field in required_fields:
+        if field not in data:
+            return jsonify({'error': f'Missing field: {field}'}), 400
+    
+    # Создаем новый трек
+    new_track = {
+        'id': next_id,
+        'title': data['title'],
+        'artist': data['artist'],
+        'album': data['album']
+    }
+    
+    tracks.append(new_track)
+    next_id += 1
+    
+    # Возвращаем созданный трек и код 201 (Created)
+    return jsonify(new_track), 201
+
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=5000, debug=True)
+```
