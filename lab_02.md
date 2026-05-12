@@ -147,8 +147,123 @@ python3 app.py
 
 ## Тестирование API
 
-# Тест 1. GET /api/tracks (получить все треки)
+**Тест 1. GET /api/tracks (получить все треки)**
+  
+```bash
+curl -v http://127.0.0.1:5000/api/tracks
+```
+**Ответ:**
+```json
+[
+  {
+    "album": "A Night at the Opera",
+    "artist": "Queen",
+    "id": 1,
+    "title": "Bohemian Rhapsody"
+  },
+  {
+    "album": "Imagine",
+    "artist": "John Lennon",
+    "id": 2,
+    "title": "Imagine"
+  }
+]
+```
+
+**Тест 2. GET /api/tracks/1 (получить конкретный трек)**
   
 ```bash
 curl http://127.0.0.1:5000/api/tracks/1
 ```
+**Ответ:**
+```json
+{
+  "album": "A Night at the Opera",
+  "artist": "Queen",
+  "id": 1,
+  "title": "Bohemian Rhapsody"
+}
+```
+
+**Тест 3. POST /api/tracks (создать новый трек)**
+  
+```bash
+curl -X POST -H "Content-Type: application/json" \
+-d '{"title": "Smells Like Teen Spirit", "artist": "Nirvana", "album": "Nevermind"}' \
+http://127.0.0.1:5000/api/tracks
+```
+**Ответ:**
+```json
+{
+  "album": "Nevermind",
+  "artist": "Nirvana",
+  "id": 3,
+  "title": "Smells Like Teen Spirit"
+}
+```
+
+# Часть 3. Настройка Nginx как обратного прокси
+
+## Установка Nginx
+
+```bash
+sudo apt update
+sudo apt install nginx -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+```
+
+Проверим, что Nginx работает:
+
+```bash
+sudo systemctl status nginx
+```
+
+Получаем такой ответ, значит все работает:
+
+```bash
+nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2026-05-13 01:01:12 MSK; 1h 9min ago
+```
+
+Далее создадим резервную копию оригинального конфига:
+
+```bash
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
+```
+
+Отредактируем конфигурационный файл:
+
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+
+**Итоговая конфигурация:**
+```nginx
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    # Обработка обычных запросов (не /api/)
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:5000;
+        
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+
