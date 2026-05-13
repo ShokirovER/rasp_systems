@@ -266,4 +266,90 @@ server {
 }
 ```
 
+## Проверка конфигурации и перезапуск
+
+```bash
+sudo nginx -t
+```
+
+**Результат:**
+```
+nginx: configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+```
+
+# Тестирование API через Nginx (порт 80)
+
+## Проверка GET все треки
+
+```bash
+curl http://localhost/api/tracks
+```
+
+**Ответ:**
+```
+[
+  {
+    "album": "A Night at the Opera",
+    "artist": "Queen",
+    "id": 1,
+    "title": "Bohemian Rhapsody"
+  },
+  {
+    "album": "Imagine",
+    "artist": "John Lennon",
+    "id": 2,
+    "title": "Imagine"
+  }
+]
+```
+
+## GET один трек по ID
+
+```bash
+curl http://localhost/api/tracks/1
+```
+
+**Ответ:**
+```
+{
+  "album": "A Night at the Opera",
+  "artist": "Queen",
+  "id": 1,
+  "title": "Bohemian Rhapsody"
+}
+```
+
+## POST - создать новый трек
+
+```bash
+curl -X POST -H "Content-Type: application/json" \
+-d '{"title": "Back in Black", "artist": "AC/DC", "album": "Back in Black"}' \
+http://localhost/api/tracks
+```
+
+**Ответ:**
+```
+{
+  "album": "Back in Black",
+  "artist": "AC/DC",
+  "id": 4,
+  "title": "Back in Black"
+}
+```
+
+# Сравнение прямого доступа и через Nginx
+
+| Параметр | Прямой доступ (порт 5000) | Через Nginx (порт 80) |
+|----------|---------------------------|----------------------|
+| URL | http://127.0.0.1:5000/api/tracks | http://localhost/api/tracks |
+| Server | Werkzeug (Flask) | nginx/1.24.0 |
+| Доступность | Только локально | Через стандартный порт HTTP |
+
+
+# Вывод
+
+В ходе выполнения лабораторной работы были изучены методы анализа HTTP-запросов с использованием утилит telnet и curl на примере сайта gazeta.ru, который возвращает редирект 301 на HTTPS. Разработан REST API для управления музыкальными треками на фреймворке Flask с поддержкой операций GET и POST. Настроен веб-сервер Nginx в качестве обратного прокси, перенаправляющий запросы с порта 80 на порт 5000, где работает Flask-приложение, что подтверждается заголовком Server: nginx и строкой подключения к порту 80 в выводе curl -v. Все задачи варианта №21 выполнены в полном объеме.
+
+
 
