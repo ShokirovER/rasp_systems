@@ -16,6 +16,7 @@
 
 lab_3/
 
+
 ├── grpc_sync/
 
 │ ├── message_service.proto # Контракт gRPC с 3 методами
