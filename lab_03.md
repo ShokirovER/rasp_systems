@@ -384,3 +384,75 @@ python3 producer.py cache:session:12345
 ```
 
 
+## Задание 2. Base64 кодирование/декодирование
+
+Producer отправляет JSON с полями action и data. gRPC сервис выполняет действие и возвращает результат.
+
+**Отправка сообщений:**
+
+```bash
+python3 producer.py encode:HelloWorld
+python3 producer.py encode:Python
+python3 producer.py decode:SGVsbG8gV29ybGQ=
+python3 producer.py decode:UHl0aG9u
+```
+
+**Результат в Consumer:**
+
+```
+  [x] Получено: encode:HelloWorld
+ [✓] Результат: Base64 Encode: SGVsbG8gV29ybGQ=
+ [x] Получено: encode:Python
+ [✓] Результат: Base64 Encode: UHl0aG9u
+ [x] Получено: decode:SGVsbG8gV29ybGQ=
+ [✓] Результат: Base64 Decode: HelloWorld
+ [x] Получено: decode:UHl0aG9u
+ [✓] Результат: Base64 Decode: Python
+
+```
+
+## Задание 3. Подсчёт символов
+
+Producer отправляет текст. gRPC сервис считает общее количество символов без пробелов и возвращает число.
+
+**Отправка сообщений:**
+
+```bash
+python3 producer.py count:HelloWorld
+python3 producer.py count:"Hello World"
+python3 producer.py count:"The quick brown fox"
+```
+
+**Результат в Consumer:**
+
+```
+   [x] Получено: count:HelloWorld
+ [✓] Результат: Count (без пробелов): 10
+ [x] Получено: count:Hello World
+ [✓] Результат: Count (без пробелов): 10
+ [x] Получено: count:The quick brown fox
+ [✓] Результат: Count (без пробелов): 16
+
+```
+
+# Заключение
+
+В ходе лабораторной работы были реализованы и протестированы два подхода к взаимодействию микросервисов:
+
+Синхронный (gRPC) — прямое соединение клиент-сервер с ожиданием ответа. Подходит для операций, требующих немедленного результата.
+
+Асинхронный (RabbitMQ + gRPC) — через брокер сообщений. Обеспечивает слабую связанность сервисов, отказоустойчивость и возможность накопления сообщений при временных сбоях.
+
+# Ключевые выводы
+
+RabbitMQ гарантирует сохранность сообщений (durable queue)
+
+Consumer может быть отключен — сообщения копятся в очереди
+
+gRPC сервер может быть перезапущен без потери данных
+
+Docker значительно упрощает развертывание инфраструктурных компонентов
+
+Асинхронный подход позволяет масштабировать Consumer'ов горизонтально
+
+Все три задания варианта 21 выполнены в полном объёме. Система работает корректно.
