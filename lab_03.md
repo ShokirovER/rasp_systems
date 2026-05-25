@@ -152,7 +152,9 @@ docker compose up -d
 docker ps
 ```
 
-<img width="1920" height="1080" alt="скриншот rabbitmq" src="https://github.com/user-attachments/assets/7b64d97c-e7f7-4698-b024-800d0079bbb3" />
+<img width="1813" height="941" alt="скриншот rabbitmq 1" src="https://github.com/user-attachments/assets/838edd2d-5075-42fd-9096-2d926e042ba6" />
+
+
 
 
 ```
