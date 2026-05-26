@@ -80,11 +80,8 @@ $$Bandwidth = \frac{1}{Interval} \times Fanout \times ActiveNodes \times PacketS
 
 ### График зависимости Bandwidth от Gossip Interval
 
-> **📌 ВСТАВЬ СКРИНШОТ:** `bandwidth_graph.png`
-> 
-> *Как получить:* файл уже сгенерирован в папке `lab_3_2` после запуска `python3 bandwidth_calc.py`
+<img width="930" height="523" alt="banwidth_graph" src="https://github.com/user-attachments/assets/4c69653b-38f9-425a-84fb-5aa31c48195c" />
 
-![График полосы пропускания](bandwidth_graph.png)
 
 **Анализ:**  
 Bandwidth обратно пропорционален Gossip Interval. Для Interval = 0.2 с (мой вариант) полоса пропускания составляет **14.75 Мбит/с**.
@@ -127,11 +124,8 @@ Bandwidth обратно пропорционален Gossip Interval. Для In
 
 ### Результаты сравнительного анализа
 
-> **📌 ВСТАВЬ СКРИНШОТ:** `comparison_boxplots.png`
-> 
-> *Как получить:* файл сгенерирован после запуска `python3 analysis.py`
+<img width="1234" height="488" alt="comparison_boxplots" src="https://github.com/user-attachments/assets/f2f64d35-7aa5-4e54-b229-84ba7ca1c3b9" />
 
-![Сравнительный анализ протоколов](comparison_boxplots.png)
 
 ### Сводная таблица результатов
 
@@ -175,9 +169,8 @@ Bandwidth обратно пропорционален Gossip Interval. Для In
 
 ### Результаты
 
-> **📌 ВСТАВЬ СКРИНШОТ:** `priority_comparison.png`
-> 
-> *Как получить:* файл сгенерирован после запуска `python3 individual_task.py`
+<img width="1233" height="461" alt="priority_comparison" src="https://github.com/user-attachments/assets/67b60c0b-c6ef-4671-b0f9-6e9ed349d9ca" />
+
 
 ![Сравнение с приоритизацией и без](priority_comparison.png)
 
@@ -237,32 +230,3 @@ Bandwidth обратно пропорционален Gossip Interval. Для In
 ### Итоговое заключение
 
 **Gossip-протокол (Serf) обеспечивает наилучший баланс между скоростью обнаружения сбоев и нагрузкой на сеть.** Heartbeat неприменим для крупных систем из-за квадратичного роста трафика. Ping слишком медленный для практического использования. Приоритизация сообщений о сбоях полезна только в высоконагруженных системах.
-
----
-
-## Исходный код
-
-Все файлы проекта доступны в репозитории:
-
-| Файл | Назначение |
-|------|------------|
-| `bandwidth_calc.py` | Расчёт полосы пропускания и построение графика |
-| `simulators.py` | Реализация трёх симуляторов (Gossip, Heartbeat, Ping) |
-| `analysis.py` | Сравнительный анализ протоколов (10 прогонов, boxplot) |
-| `individual_task.py` | Исследование приоритизации сообщений (вариант №21) |
-| `requirements.txt` | Зависимости (numpy, matplotlib, pandas) |
-
-### Запуск проекта
-
-```bash
-# Установка зависимостей
-pip install -r requirements.txt
-
-# Расчёт полосы пропускания
-python3 bandwidth_calc.py
-
-# Сравнительный анализ
-python3 analysis.py
-
-# Индивидуальное задание (приоритизация)
-python3 individual_task.py
