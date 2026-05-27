@@ -347,6 +347,10 @@ http://localhost/api/tracks
 }
 ```
 
+```bash
+curl -v http://localhost/api/tracks 2>&1 | head -12
+```
+
 # Сравнение прямого доступа и через Nginx
 
 | Параметр | Прямой доступ (порт 5000) | Через Nginx (порт 80) |
