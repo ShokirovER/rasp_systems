@@ -15,6 +15,15 @@
 ## Базовый запрос с выводом заголовков
 
 ```bash
+telnet gazeta.ru 80
+```
+
+```bash
+GET / HTTP/1.1
+Host: gazeta.ru
+```
+
+```bash
 curl -I http://gazeta.ru
 ```
 
