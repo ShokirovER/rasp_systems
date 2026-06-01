@@ -176,7 +176,8 @@ ID задачи: 1
 
 ### Скриншот 3: Работа сервера
 
-<img width="1497" height="742" alt="image" src="https://github.com/user-attachments/assets/38aa5c39-789a-4e23-ba3d-f252367e0b37" />
+<img width="662" height="654" alt="image" src="https://github.com/user-attachments/assets/bf112651-d7f7-4d0d-ad09-be2566db0aaa" />
+
 
 Пример:
 
