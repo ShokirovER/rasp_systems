@@ -131,7 +131,7 @@
 
 # 📈 График 4 — Влияние приоритета сообщения на скорость доставки
 
-![Uploading image.png…]()
+<img width="860" height="552" alt="image" src="https://github.com/user-attachments/assets/5a9fc27a-3138-4f0b-9978-6e89af2f648b" />
 
 ### Анализ графика
 
