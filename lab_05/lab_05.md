@@ -141,7 +141,7 @@ docker compose ps
 
 ### Скриншот 1. Результат выполнения команды docker compose ps
 
-**Вставить скриншот здесь**
+<img width="1294" height="177" alt="image" src="https://github.com/user-attachments/assets/6eda6b69-235f-409e-91dc-4630c93a04a6" />
 
 ---
 
@@ -163,7 +163,7 @@ http://localhost:8000
 
 ### Скриншот 2. Работа приложения в браузере
 
-**Вставить скриншот здесь**
+<img width="827" height="289" alt="image" src="https://github.com/user-attachments/assets/29c7cf17-918e-4574-9a88-59e13e0f4423" />
 
 ---
 
@@ -185,7 +185,7 @@ GET hits
 
 ### Скриншот 3. Проверка значения счетчика в Redis
 
-**Вставить скриншот здесь**
+<img width="1281" height="149" alt="image" src="https://github.com/user-attachments/assets/6091238c-4f06-4737-b6f7-43da087c3d75" />
 
 ---
 
@@ -207,7 +207,7 @@ docker compose logs -f web
 
 ### Скриншот 4. Логи веб-приложения
 
-**Вставить скриншот здесь**
+<img width="1285" height="458" alt="image" src="https://github.com/user-attachments/assets/b870aca9-0cd4-44db-aaad-2dbf5e5525b2" />
 
 ---
 
