@@ -149,6 +149,8 @@ docker compose up -d
 **Проверка статуса контейнера**
 
 ``` bash
+cd ~/Desktop/lab_3/rabbitmq_async
+docker compose up -d
 docker ps
 ```
 
